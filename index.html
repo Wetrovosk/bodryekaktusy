@@ -4,206 +4,255 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Бодрые кактусы</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script> 
   <style>
-    .completed {
-      outline: 4px solid #10B981;
-      transform: scale(1.02);
+    :root {
+      --bg: #F8F9FC;
+      --card-bg: #FFFFFF;
+      --shadow-light: #D7E2F3;
+      --shadow-dark: #B4C3DC;
+      --accent: #10B981;
+      --text-main: #1A202C;
+      --text-muted: #64748b;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1A202C, #374151);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background: var(--card-bg);
+      border-radius: 999px;
+      color: var(--text-main);
+      box-shadow: 5px 5px 15px var(--shadow-light), -5px -5px 15px var(--shadow-dark);
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      transform: translateY(-2px);
+      box-shadow: 8px 8px 18px var(--shadow-light), -8px -8px 18px var(--shadow-dark);
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
     .card {
-      transition: transform 0.3s ease;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 5px 5px 15px var(--shadow-light), -5px -5px 15px var(--shadow-dark);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card.completed {
+      border-left: 5px solid var(--accent);
+      box-shadow: 8px 8px 18px var(--shadow-light), -8px -8px 18px var(--shadow-dark);
+    }
+
+    .card.completed::after {
+      content: '✅';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .status {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .status.completed {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
   </style>
 </head>
-<body class="bg-gradient-to-b from-amber-50 to-amber-200 text-gray-800 font-sans">
+<body>
 
   <!-- Header -->
-  <header class="bg-amber-900 text-white p-6 shadow-lg">
-    <h1 class="text-3xl md:text-4xl font-bold text-center">Бодрые кактусы</h1>
-    <p class="text-center mt-2 text-lg">Выполнение заданий Самоделкина</p>
+  <header>
+    <h1>Бодрые кактусы</h1>
+    <p>Выполнение заданий Самоделкина</p>
   </header>
 
   <!-- Tabs Navigation -->
-  <nav class="bg-amber-700 text-white shadow-md">
-    <ul class="flex flex-wrap justify-center gap-1 md:gap-2 px-2 py-2">
-      <li><a href="#task1" class="block px-4 py-2 rounded-md hover:bg-amber-600">Задание №1</a></li>
-      <li><a href="#task2" class="block px-4 py-2 rounded-md hover:bg-amber-600">Задание №2</a></li>
-      <li><a href="#task3" class="block px-4 py-2 rounded-md hover:bg-amber-600">Задание №3</a></li>
-      <li><a href="#task4" class="block px-4 py-2 rounded-md hover:bg-amber-600">Задание №4</a></li>
-      <li><a href="#task5" class="block px-4 py-2 rounded-md hover:bg-amber-600">Задание №5</a></li>
-    </ul>
+  <nav>
+    <a href="#task1" class="active">Задание №1</a>
+    <a href="#task2">Задание №2</a>
+    <a href="#task3">Задание №3</a>
+    <a href="#task4">Задание №4</a>
+    <a href="#task5">Задание №5</a>
   </nav>
 
   <!-- Task Sections -->
-  <main class="container mx-auto px-4 py-8 space-y-12">
+  <main>
 
     <!-- Task 1 -->
-    <section id="task1" class="mb-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-amber-800">Задание №1: Предметы индейца</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Перо птицы -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/10/300/200"  alt="Перо птицы" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Перо птицы</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+    <section id="task1">
+      <h2 class="text-2xl font-bold text-center mb-6">Задание №1: Предметы индейца</h2>
+      <div class="cards">
+
+        <div class="card completed">
+          <div class="card-title">Перо птицы</div>
+          <p class="status completed">Выполнено</p>
         </div>
 
-        <!-- Лук со стрелами -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/11/300/200"  alt="Лук со стрелами" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Лук со стрелами</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Лук со стрелами</div>
+          <p class="status completed">Выполнено</p>
         </div>
 
-        <!-- Шкура животного -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card">
-          <img src="https://picsum.photos/id/12/300/200"  alt="Шкура животного" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Шкура животного</h3>
-            <p class="text-sm text-gray-500 italic mt-1 text-center">⏳ Не выполнено</p>
-          </div>
+        <div class="card">
+          <div class="card-title">Шкура животного</div>
+          <p class="status">Не выполнено</p>
         </div>
 
-        <!-- Животное -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/13/300/200"  alt="Животное" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Животное</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Животное</div>
+          <p class="status completed">Выполнено</p>
         </div>
 
-        <!-- Топор -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/14/300/200"  alt="Топор" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Топор</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Топор</div>
+          <p class="status completed">Выполнено</p>
         </div>
 
-        <!-- Лодка -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/15/300/200"  alt="Лодка" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Лодка</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Лодка</div>
+          <p class="status completed">Выполнено</p>
         </div>
 
-        <!-- Барабан -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/16/300/200"  alt="Барабан" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Барабан</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Барабан</div>
+          <p class="status completed">Выполнено</p>
         </div>
 
-        <!-- Золото -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/17/300/200"  alt="Золото" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Золото</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Золото</div>
+          <p class="status completed">Выполнено</p>
         </div>
 
-        <!-- Скальп -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/18/300/200"  alt="Скальп" class="w-full h-40 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Скальп (можно парик)</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Скальп (можно парик)</div>
+          <p class="status completed">Выполнено</p>
         </div>
+
       </div>
     </section>
 
     <!-- Task 2 -->
-    <section id="task2" class="mb-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-amber-800">Задание №2: Преображение в индейца</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card">
-          <img src="https://picsum.photos/id/20/400/300"  alt="Преображение" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Образ индейца</h3>
-            <p class="text-sm text-gray-500 italic mt-1 text-center">⏳ Не выполнено</p>
-          </div>
+    <section id="task2">
+      <h2 class="text-2xl font-bold text-center mb-6">Задание №2: Преображение в индейца</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">Преобразиться в образ индейца</div>
+          <p class="status">Не выполнено</p>
         </div>
-        <!-- Добавь остальные фото по мере выполнения -->
       </div>
     </section>
 
     <!-- Task 3 -->
-    <section id="task3" class="mb-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-amber-800">Задание №3: Боевой клич индейцев</h2>
-      <div class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto card">
-        <h3 class="text-xl font-semibold mb-4">Аудиозапись</h3>
-        <p class="mb-4">
-          Каждый участник записывает аудио, где начинает с фразы:
-        </p>
-        <blockquote class="border-l-4 border-amber-600 pl-4 italic text-gray-700">
-          "[Ник участника], команда Бодрые кактусы"
-        </blockquote>
-        <p class="mt-2">После этого произносит боевой клич индейцев.</p>
-        <p class="text-sm text-gray-500 italic mt-4">⏳ Не выполнено</p>
+    <section id="task3">
+      <h2 class="text-2xl font-bold text-center mb-6">Задание №3: Боевой клич индейцев</h2>
+      <div class="cards">
+        <div class="card completed">
+          <div class="card-title">Произнести боевой клич</div>
+          <p class="status completed">Выполнено</p>
+        </div>
       </div>
     </section>
 
     <!-- Task 4 -->
-    <section id="task4" class="mb-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-amber-800">Задание №4: Развести костер</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <!-- Материалы -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/25/400/300"  alt="Материалы" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Материалы для костра</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+    <section id="task4">
+      <h2 class="text-2xl font-bold text-center mb-6">Задание №4: Развести костер</h2>
+      <div class="cards">
+        <div class="card completed">
+          <div class="card-title">Материалы для костра</div>
+          <p class="status completed">Выполнено</p>
         </div>
-
-        <!-- Костер -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card completed">
-          <img src="https://picsum.photos/id/26/400/300"  alt="Костер" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Готовый костер</h3>
-            <p class="text-sm text-green-600 italic mt-1 text-center">✅ Выполнено</p>
-          </div>
+        <div class="card completed">
+          <div class="card-title">Сам костер</div>
+          <p class="status completed">Выполнено</p>
         </div>
       </div>
     </section>
 
     <!-- Task 5 -->
-    <section id="task5" class="mb-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-amber-800">Задание №5: Творчество</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card">
-          <img src="https://picsum.photos/id/30/400/300"  alt="Материалы" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Материалы</h3>
-            <p class="text-sm text-gray-500 italic mt-1 text-center">⏳ Не выполнено</p>
-          </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card">
-          <img src="https://picsum.photos/id/31/400/300"  alt="Процесс" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Процесс рисования</h3>
-            <p class="text-sm text-gray-500 italic mt-1 text-center">⏳ Не выполнено</p>
-          </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card">
-          <img src="https://picsum.photos/id/32/400/300"  alt="Итог" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="font-semibold text-lg text-center">Готовый рисунок</h3>
-            <p class="text-sm text-gray-500 italic mt-1 text-center">⏳ Не выполнено</p>
-          </div>
+    <section id="task5">
+      <h2 class="text-2xl font-bold text-center mb-6">Задание №5: Творчество</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">Нарисовать рисунок про индейца</div>
+          <p class="status">Не выполнено</p>
         </div>
       </div>
     </section>
@@ -211,7 +260,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-amber-900 text-white text-center py-4 mt-12">
+  <footer>
     <p>© 2025 Команда Бодрые кактусы | Все задания выполнены!</p>
   </footer>
 
